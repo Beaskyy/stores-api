@@ -8,6 +8,8 @@ const app = express();
 // connect to database
 const connectDB = require("./db/connect");
 
+const productsRouter = require("./routes/products");
+
 const notFoundMiddleware = require("./middleware/not-found");
 const ErrorMiddleware = require("./middleware/error-handler");
 
@@ -18,6 +20,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send('<h1>Store api</h1> <a href="/api/v1/products">products routes</a>');
 });
+
+app.use("/api/v1/products", productsRouter);
 
 app.use(notFoundMiddleware);
 app.use(ErrorMiddleware);
